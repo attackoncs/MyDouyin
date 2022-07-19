@@ -8,9 +8,9 @@ import (
 
 	"MyDouyin/pkg/errno"
 
-	"MyDouyin/cmd/user/kitex_gen/user"
+	"MyDouyin/kitex_gen/user"
 
-	"MyDouyin/cmd/user/dal/db"
+	"MyDouyin/dal/db"
 )
 
 type CreateUserService struct {

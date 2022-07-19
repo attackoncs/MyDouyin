@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"MyDouyin/cmd/user/kitex_gen/user"
-	"MyDouyin/cmd/user/kitex_gen/user/usersrv"
+	"MyDouyin/kitex_gen/user"
+	"MyDouyin/kitex_gen/user/usersrv"
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"

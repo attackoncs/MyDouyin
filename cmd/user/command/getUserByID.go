@@ -3,10 +3,10 @@ package command
 import (
 	"context"
 
-	"MyDouyin/cmd/user/kitex_gen/user"
+	"MyDouyin/kitex_gen/user"
 
-	"MyDouyin/cmd/user/dal/db"
-	"MyDouyin/cmd/user/pack"
+	"MyDouyin/dal/db"
+	"MyDouyin/pack"
 )
 
 type MGetUserService struct {

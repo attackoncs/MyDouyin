@@ -8,8 +8,8 @@ import (
 
 	"github.com/cloudwego/kitex/pkg/klog"
 
-	"MyDouyin/cmd/user/dal"
-	user "MyDouyin/cmd/user/kitex_gen/user/usersrv"
+	"MyDouyin/dal"
+	user "MyDouyin/kitex_gen/user/usersrv"
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"

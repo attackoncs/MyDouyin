@@ -6,8 +6,8 @@ import (
 
 	"MyDouyin/pkg/errno"
 
-	"MyDouyin/cmd/user/kitex_gen/user"
-	"MyDouyin/cmd/user/pack"
+	"MyDouyin/kitex_gen/user"
+	"MyDouyin/pack"
 
 	"MyDouyin/cmd/api/rpc"
 

@@ -1,7 +1,7 @@
 package dal
 
 import (
-	db "MyDouyin/cmd/user/dal/db"
+	db "MyDouyin/dal/db"
 	"MyDouyin/pkg/ttviper"
 )
 

@@ -1,9 +1,9 @@
 package pack
 
 import (
-	"MyDouyin/cmd/user/kitex_gen/user"
+	"MyDouyin/kitex_gen/user"
 
-	"MyDouyin/cmd/user/dal/db"
+	"MyDouyin/dal/db"
 )
 
 // User pack user info

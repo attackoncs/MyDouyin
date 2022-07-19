@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"MyDouyin/cmd/user/command"
-	"MyDouyin/cmd/user/kitex_gen/user"
-	"MyDouyin/cmd/user/pack"
+	"MyDouyin/kitex_gen/user"
+	"MyDouyin/pack"
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/jwt"
 )
