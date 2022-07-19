@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go.uber.org/zap"
 	"net/http"
 	"time"
 
@@ -30,20 +31,24 @@ func Init() {
 }
 
 func main() {
-	Init()
-	r := gin.New()
-
 	logger := Config.InitLogger()
+	defer logger.Sync()
+
+	zap.ReplaceGlobals(logger)
+
+	Init()
+
+	r := gin.New()
 
 	// Add a ginzap middleware, which:
 	//   - Logs all requests, like a combined access and error log.
 	//   - Logs to stdout.
 	//   - RFC3339 with UTC time format.
-	r.Use(ginzap.Ginzap(logger, time.RFC3339, false))
+	r.Use(ginzap.Ginzap(zap.L(), time.RFC3339, false))
 
 	// Logs all panic to error log
 	//   - stack means whether output the stack info.
-	r.Use(ginzap.RecoveryWithZap(logger, true))
+	r.Use(ginzap.RecoveryWithZap(zap.L(), true))
 
 	douyin := r.Group("/douyin")
 	user := douyin.Group("/user")
