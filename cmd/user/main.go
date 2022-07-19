@@ -1,6 +1,7 @@
 package main
 
 import (
+	"MyDouyin/pkg/dlog"
 	"context"
 	"fmt"
 	"net"
@@ -32,6 +33,11 @@ var (
 func Init() {
 	dal.Init(&Config)
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))
+	var logger klog.FullLogger = &dlog.ZapLogger{
+		StdLog: Config.InitLogger(),
+		Level:  klog.LevelInfo,
+	}
+	klog.SetLogger(logger)
 }
 
 func main() {
