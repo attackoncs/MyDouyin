@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"MyDouyin/kitex_gen/feed"
-	"MyDouyin/kitex_gen/feed/feedsrv"
+	"MyDouyin/kitex_gen/relation"
+	"MyDouyin/kitex_gen/relation/relationsrv"
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
@@ -18,9 +18,10 @@ import (
 	"github.com/kitex-contrib/obs-opentelemetry/tracing"
 )
 
-var feedClient feedsrv.Client
+var relationClient relationsrv.Client
 
-func initFeedRpc(Config *ttviper.Config) {
+// Relation RPC 客户端初始化
+func initRelationRpc(Config *ttviper.Config) {
 	EtcdAddress := fmt.Sprintf("%s:%d", Config.Viper.GetString("Etcd.Address"), Config.Viper.GetInt("Etcd.Port"))
 	r, err := etcd.NewEtcdResolver([]string{EtcdAddress})
 	if err != nil {
@@ -35,7 +36,7 @@ func initFeedRpc(Config *ttviper.Config) {
 	)
 	defer p.Shutdown(context.Background())
 
-	c, err := feedsrv.NewClient(
+	c, err := relationsrv.NewClient(
 		ServiceName,
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
@@ -51,11 +52,36 @@ func initFeedRpc(Config *ttviper.Config) {
 	if err != nil {
 		panic(err)
 	}
-	feedClient = c
+	relationClient = c
 }
 
-func GetUserFeed(ctx context.Context, req *feed.DouyinFeedRequest) (resp *feed.DouyinFeedResponse, err error) {
-	resp, err = feedClient.GetUserFeed(ctx, req)
+// 传递 关注操作 的上下文, 并获取 RPC Server 端的响应.
+func RelationAction(ctx context.Context, req *relation.DouyinRelationActionRequest) (resp *relation.DouyinRelationActionResponse, err error) {
+	resp, err = relationClient.RelationAction(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 0 {
+		return nil, errno.NewErrNo(int(resp.StatusCode), *resp.StatusMsg)
+	}
+	return resp, nil
+}
+
+// 传递 获取正在关注列表操作 的上下文, 并获取 RPC Server 端的响应.
+func RelationFollowList(ctx context.Context, req *relation.DouyinRelationFollowListRequest) (resp *relation.DouyinRelationFollowListResponse, err error) {
+	resp, err = relationClient.RelationFollowList(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 0 {
+		return nil, errno.NewErrNo(int(resp.StatusCode), *resp.StatusMsg)
+	}
+	return resp, nil
+}
+
+// 传递 获取粉丝列表操作 的上下文, 并获取 RPC Server 端的响应.
+func RelationFollowerList(ctx context.Context, req *relation.DouyinRelationFollowerListRequest) (resp *relation.DouyinRelationFollowerListResponse, err error) {
+	resp, err = relationClient.RelationFollowerList(ctx, req)
 	if err != nil {
 		return nil, err
 	}
