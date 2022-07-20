@@ -1,3 +1,7 @@
+/*
+ * Feed RPC 客户端初始化及 相关 RPC 通信操作定义
+ */
+
 package rpc
 
 import (
@@ -10,6 +14,7 @@ import (
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
@@ -20,6 +25,7 @@ import (
 
 var feedClient feedsrv.Client
 
+// Feed RPC 客户端初始化
 func initFeedRpc(Config *ttviper.Config) {
 	EtcdAddress := fmt.Sprintf("%s:%d", Config.Viper.GetString("Etcd.Address"), Config.Viper.GetInt("Etcd.Port"))
 	r, err := etcd.NewEtcdResolver([]string{EtcdAddress})
@@ -54,6 +60,7 @@ func initFeedRpc(Config *ttviper.Config) {
 	feedClient = c
 }
 
+// 传递 获取视频流操作 的上下文, 并获取 RPC Server 端的响应.
 func GetUserFeed(ctx context.Context, req *feed.DouyinFeedRequest) (resp *feed.DouyinFeedResponse, err error) {
 	resp, err = feedClient.GetUserFeed(ctx, req)
 	if err != nil {

@@ -1,3 +1,7 @@
+/*
+ * 封装 RPC Server 端响应
+ */
+
 package pack
 
 import (

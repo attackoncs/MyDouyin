@@ -1,3 +1,7 @@
+/*
+ * Feed 数据库操作业务逻辑
+ */
+
 package db
 
 import (
@@ -7,6 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Video Gorm Data Structures
 type Video struct {
 	gorm.Model
 	UpdatedAt     time.Time `gorm:"column:update_time;not null;index:idx_update" `

@@ -1,3 +1,7 @@
+/*
+ * RPC Server Middleware
+ */
+
 package middleware
 
 import (

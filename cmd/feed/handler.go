@@ -1,11 +1,16 @@
+/*
+ * 定义 Feed RPC Server 端的相关接口
+ */
+
 package main
 
 import (
+	"context"
+
 	"MyDouyin/cmd/feed/command"
 	"MyDouyin/dal/pack"
 	"MyDouyin/kitex_gen/feed"
 	"MyDouyin/pkg/errno"
-	"context"
 )
 
 // FeedSrvImpl implements the last service interface defined in the IDL.
@@ -37,7 +42,7 @@ func (s *FeedSrvImpl) GetUserFeed(ctx context.Context, req *feed.DouyinFeedReque
 }
 
 // GetVideoById implements the FeedSrvImpl interface.
+// Deprecated: Never Use GetVideoById
 func (s *FeedSrvImpl) GetVideoById(ctx context.Context, req *feed.VideoIdRequest) (resp *feed.Video, err error) {
-	// TODO: Your code here...
 	return
 }

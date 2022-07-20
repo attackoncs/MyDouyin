@@ -1,3 +1,7 @@
+/*
+ * User RPC Server 端初始化
+ */
+
 package main
 
 import (
@@ -15,6 +19,7 @@ import (
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
@@ -34,6 +39,7 @@ var (
 	Argon2Config *command.Argon2Params
 )
 
+// User RPC Server 端配置初始化
 func Init() {
 	dal.Init()
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))
@@ -46,6 +52,7 @@ func Init() {
 	}
 }
 
+// User RPC Server 端运行
 func main() {
 	var logger dlog.ZapLogger = dlog.ZapLogger{
 		Level: klog.LevelInfo,

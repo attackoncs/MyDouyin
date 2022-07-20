@@ -1,3 +1,7 @@
+/*
+ * Publish RPC Server 端初始化
+ */
+
 package main
 
 import (
@@ -6,6 +10,7 @@ import (
 	"net"
 
 	"MyDouyin/dal"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"moul.io/zapgorm2"
@@ -15,6 +20,7 @@ import (
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 

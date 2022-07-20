@@ -6,13 +6,13 @@ JWT:
   signingKey: "signingKey"
 
 Etcd:
-  - Address: "127.0.0.1"
-    Port: 2379
+  Address: "127.0.0.1"
+  Port: 2379
 
 Server:
-  Name: "TiktokAPIServer"
-  Address: "0.0.0.0"
-  Port: 8088
+  Name: "TiktokFeedServer"
+  Address: "127.0.0.1"
+  Port: 8082
 
 Client:
   Echo: true
@@ -20,3 +20,5 @@ Client:
   Servers:
     - "127.0.0.1"
     - "192.168.1.1"
+
+

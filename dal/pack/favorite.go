@@ -1,3 +1,7 @@
+/*
+ * 封装 FavoriteVideos 数据库数据为 RPC Server 端响应
+ */
+
 package pack
 
 import (

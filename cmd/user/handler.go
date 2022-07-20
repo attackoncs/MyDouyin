@@ -1,10 +1,14 @@
+/*
+ * 定义 User RPC Server 端的相关接口
+ */
+
 package main
 
 import (
-	"MyDouyin/dal/pack"
 	"context"
 
 	"MyDouyin/cmd/user/command"
+	"MyDouyin/dal/pack"
 	"MyDouyin/kitex_gen/user"
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/jwt"

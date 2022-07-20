@@ -1,11 +1,11 @@
+/*
+ * 错误码, 设计逻辑:https://github.com/a76yyyy/ErrnoCode
+ */
+
+// 错误码
 package errno
 
 import code "github.com/a76yyyy/ErrnoCode"
-
-const (
-	// ErrVideoNotFound - 400: Video not found.
-	codeErrVideoNotFound int = iota + 110201
-)
 
 // HTTP Error
 var (

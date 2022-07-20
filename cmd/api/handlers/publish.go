@@ -1,4 +1,7 @@
-//定义 Publish API 的 handler
+/*
+ * @Description: 定义 Publish API 的 handler
+ */
+
 package handlers
 
 import (
@@ -17,6 +20,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 传递 发布视频操作 的上下文至 Publish 服务的 RPC 客户端, 并获取相应的响应.
 func PublishAction(c *gin.Context) {
 	var paramVar PublishActionParam
 	token := c.PostForm("token")
@@ -50,6 +54,7 @@ func PublishAction(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
+// 传递 获取视频列表操作 的上下文至 Publish 服务的 RPC 客户端, 并获取相应的响应.
 func PublishList(c *gin.Context) {
 	var paramVar UserParam
 	userid, err := strconv.Atoi(c.Query("user_id"))

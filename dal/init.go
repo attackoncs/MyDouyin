@@ -1,3 +1,7 @@
+/*
+ * 初始化数据层
+ */
+
 package dal
 
 import (

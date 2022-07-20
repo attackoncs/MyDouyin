@@ -1,3 +1,7 @@
+/*
+ * 错误码报错业务逻辑
+ */
+
 package errno
 
 import (
@@ -27,7 +31,10 @@ func NewErrNo(code int, msg string) ErrNo {
 }
 
 func NewHttpErr(code int, httpcode int, msg string) HttpErr {
-	return HttpErr{httpcode, ErrNo{code, msg}}
+	return HttpErr{
+		StatusCode: httpcode,
+		ErrNo:      ErrNo{ErrCode: code, ErrMsg: msg},
+	}
 }
 
 func (e ErrNo) Error() string {
@@ -40,16 +47,17 @@ func (e ErrNo) WithMessage(msg string) ErrNo {
 }
 
 func NewErr(errno *ErrNo, err error) *Err {
-	return &Err{errno.ErrCode, errno.ErrMsg, err}
+	return &Err{ErrCode: errno.ErrCode, ErrMsg: errno.ErrMsg, Err: err}
 }
 
 func (err *Err) Add(message string) error {
+	//err.ErrMsg = fmt.Sprintf("%s %s", err.ErrMsg, message)
 	err.ErrMsg += " " + message
 	return err
 }
 
-//没用到
 func (err *Err) Addf(format string, args ...interface{}) error {
+	//return err.ErrMsg = fmt.Sprintf("%s %s", err.ErrMsg, fmt.Sprintf(format, args...))
 	err.ErrMsg += " " + fmt.Sprintf(format, args...)
 	return err
 }
@@ -58,7 +66,6 @@ func (err *Err) Error() string {
 	return fmt.Sprintf("Err - code: %d, message: %s, error: %s", err.ErrCode, err.ErrMsg, err.Err)
 }
 
-//没用到
 func IsErrUserNotFound(err error) bool {
 	code, _ := DecodeErr(err)
 	return code == ErrUserNotFound.ErrCode
@@ -80,6 +87,7 @@ func DecodeErr(err error) (int, string) {
 	return ErrUnknown.ErrCode, err.Error()
 }
 
+// ConvertErr convert error to Errno
 func ConvertErr(err error) ErrNo {
 	Err := ErrNo{}
 	if errors.As(err, &Err) {

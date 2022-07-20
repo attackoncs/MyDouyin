@@ -1,9 +1,14 @@
+/*
+ * Relation 数据库操作业务逻辑
+ */
+
 package db
 
 import (
 	"context"
 
 	"MyDouyin/pkg/errno"
+
 	"gorm.io/gorm"
 )
 

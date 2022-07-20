@@ -1,3 +1,7 @@
+/*
+ * Comment RPC 客户端初始化及 相关 RPC 通信操作定义
+ */
+
 package rpc
 
 import (
@@ -10,6 +14,7 @@ import (
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"

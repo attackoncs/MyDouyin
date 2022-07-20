@@ -1,3 +1,7 @@
+/*
+ * Relation RPC Server 端初始化
+ */
+
 package main
 
 import (
@@ -6,6 +10,7 @@ import (
 	"net"
 
 	"MyDouyin/dal"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"moul.io/zapgorm2"
@@ -15,6 +20,7 @@ import (
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 
@@ -32,11 +38,13 @@ var (
 	Jwt         *jwt.JWT
 )
 
+// Relation RPC Server 端配置初始化
 func Init() {
 	dal.Init()
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))
 }
 
+// Relation RPC Server 端运行
 func main() {
 	var logger dlog.ZapLogger = dlog.ZapLogger{
 		Level: klog.LevelInfo,

@@ -1,15 +1,19 @@
-//封装 Videos 数据库数据为 RPC Server 端响应
+/*
+ * @Description: 定义 Feed API 的 handler
+ */
+
 package handlers
 
 import (
-	"MyDouyin/dal/pack"
 	"context"
 	"strconv"
 
 	"MyDouyin/pkg/errno"
 
-	"MyDouyin/cmd/api/rpc"
+	"MyDouyin/dal/pack"
 	"MyDouyin/kitex_gen/feed"
+
+	"MyDouyin/cmd/api/rpc"
 
 	"github.com/gin-gonic/gin"
 )

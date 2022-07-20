@@ -1,3 +1,7 @@
+/*
+ * 基于配置信息初始化 RPC 客户端
+ */
+
 package rpc
 
 import "MyDouyin/pkg/ttviper"

@@ -1,3 +1,7 @@
+/*
+ * 定义 Relation RPC Server 端的相关接口
+ */
+
 package main
 
 import (

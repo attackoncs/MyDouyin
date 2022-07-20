@@ -1,9 +1,14 @@
+/*
+ * Comment 数据库操作业务逻辑
+ */
+
 package db
 
 import (
 	"context"
 
 	"MyDouyin/pkg/errno"
+
 	"gorm.io/gorm"
 )
 
@@ -20,6 +25,7 @@ func (Comment) TableName() string {
 	return "comment"
 }
 
+// NewComment creates a new Comment
 func NewComment(ctx context.Context, comment *Comment) error {
 	err := DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
@@ -44,6 +50,7 @@ func NewComment(ctx context.Context, comment *Comment) error {
 	return err
 }
 
+// DelComment deletes a comment from the database.
 func DelComment(ctx context.Context, commentID int64, vid int64) error {
 	err := DB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
@@ -73,6 +80,7 @@ func DelComment(ctx context.Context, commentID int64, vid int64) error {
 	return err
 }
 
+// GetVideoComments returns a list of video comments.
 func GetVideoComments(ctx context.Context, vid int64) ([]*Comment, error) {
 	var comments []*Comment
 	err := DB.WithContext(ctx).Model(&Comment{}).Where(&Comment{VideoID: int(vid)}).Find(&comments).Error

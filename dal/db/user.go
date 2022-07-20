@@ -1,3 +1,7 @@
+/*
+ * User 数据库操作业务逻辑
+ */
+
 package db
 
 import (
@@ -6,12 +10,14 @@ import (
 	"gorm.io/gorm"
 )
 
+// User Gorm Data Structures
 type User struct {
 	gorm.Model
-	UserName       string `gorm:"index:idx_username,unique;type:varchar(40);not null" json:"username"`
-	Password       string `gorm:"type:varchar(256);not null" json:"password"`
-	FollowingCount int    `gorm:"default:0"`
-	FollowerCount  int    `gorm:"default:0"`
+	UserName       string  `gorm:"index:idx_username,unique;type:varchar(40);not null" json:"username"`
+	Password       string  `gorm:"type:varchar(256);not null" json:"password"`
+	FavoriteVideos []Video `gorm:"many2many:user_favorite_videos" json:"favorite_videos"`
+	FollowingCount int     `gorm:"default:0" json:"following_count"`
+	FollowerCount  int     `gorm:"default:0" json:"follower_count"`
 }
 
 func (User) TableName() string {
@@ -31,8 +37,8 @@ func MGetUsers(ctx context.Context, userIDs []int64) ([]*User, error) {
 	return res, nil
 }
 
-// MGetUsers multiple get list of user info
-func MGetUser(ctx context.Context, userID int64) (*User, error) {
+// GetUserByID multiple get list of user info
+func GetUserByID(ctx context.Context, userID int64) (*User, error) {
 	res := new(User)
 
 	if err := DB.WithContext(ctx).First(&res, userID).Error; err != nil {

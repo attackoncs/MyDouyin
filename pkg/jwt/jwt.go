@@ -1,3 +1,7 @@
+/*
+ * 基于 http://github.com/golang-jwt/jwt 的代码封装
+ */
+
 package jwt
 
 import (
@@ -28,7 +32,9 @@ type CustomClaims struct {
 }
 
 func NewJWT(SigningKey []byte) *JWT {
-	return &JWT{SigningKey}
+	return &JWT{
+		SigningKey,
+	}
 }
 
 // CreateToken creates a new token
@@ -36,6 +42,7 @@ func (j *JWT) CreateToken(claims CustomClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	//zap.S().Debugf(token.SigningString())
 	return token.SignedString(j.SigningKey)
+
 }
 
 // ParseToken parses the token.

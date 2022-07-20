@@ -1,3 +1,8 @@
+/*
+ * 使用 Gin 提供 API 服务将 HTTP 请求发送给 RPC 微服务端
+ */
+
+// 使用 Gin 提供 API 服务将 HTTP 请求发送给 RPC 微服务端
 package main
 
 import (
@@ -7,12 +12,14 @@ import (
 
 	"MyDouyin/cmd/api/handlers"
 	"MyDouyin/cmd/api/rpc"
+
 	"go.uber.org/zap"
 
 	// jwt "github.com/appleboy/gin-jwt/v2"
 	"MyDouyin/pkg/dlog"
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/ttviper"
+
 	"github.com/cloudwego/kitex/pkg/klog"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
@@ -26,11 +33,13 @@ var (
 	Jwt         *jwt.JWT
 )
 
+// 初始化 API 配置
 func Init() {
 	rpc.InitRPC(&Config)
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))
 }
 
+// 初始化 GIN API 及 Router
 func main() {
 	logger := dlog.InitLog()
 	defer logger.Sync()

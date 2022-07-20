@@ -1,3 +1,7 @@
+/*
+ * 登录 操作业务逻辑
+ */
+
 package command
 
 import (
@@ -8,6 +12,7 @@ import (
 	"strings"
 
 	"MyDouyin/pkg/errno"
+
 	"golang.org/x/crypto/argon2"
 
 	"MyDouyin/kitex_gen/user"
@@ -36,9 +41,9 @@ func (s *CheckUserService) CheckUser(req *user.DouyinUserRegisterRequest) (int64
 	if len(users) == 0 {
 		return 0, errno.ErrUserNotFound
 	}
-	u := users[0]
+	user := users[0]
 
-	passWordMatch, err := comparePasswordAndHash(req.Password, u.Password)
+	passWordMatch, err := comparePasswordAndHash(req.Password, user.Password)
 	if err != nil {
 		return 0, err
 	}
@@ -46,9 +51,10 @@ func (s *CheckUserService) CheckUser(req *user.DouyinUserRegisterRequest) (int64
 	if !passWordMatch {
 		return 0, errno.ErrPasswordIncorrect
 	}
-	return int64(u.ID), nil
+	return int64(user.ID), nil
 }
 
+// comparePasswordAndHash compares the password and hash of the given password.
 func comparePasswordAndHash(password, encodedHash string) (match bool, err error) {
 	// Extract the parameters, salt and derived key from the encoded password
 	// hash.
@@ -69,6 +75,9 @@ func comparePasswordAndHash(password, encodedHash string) (match bool, err error
 	return false, nil
 }
 
+// decodeHash decode the hash of the password from the database.
+//
+// returns an error if the password is not valid.
 func decodeHash(encodedHash string) (argon2Params *Argon2Params, salt, hash []byte, err error) {
 	vals := strings.Split(encodedHash, "$")
 	if len(vals) != 6 {

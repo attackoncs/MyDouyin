@@ -1,3 +1,7 @@
+/*
+ * User RPC 客户端初始化及 相关 RPC 通信操作定义
+ */
+
 package rpc
 
 import (
@@ -10,6 +14,7 @@ import (
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
+
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/client"
 	"github.com/cloudwego/kitex/pkg/retry"
@@ -20,6 +25,7 @@ import (
 
 var userClient usersrv.Client
 
+// User RPC 客户端初始化
 func initUserRpc(Config *ttviper.Config) {
 	EtcdAddress := fmt.Sprintf("%s:%d", Config.Viper.GetString("Etcd.Address"), Config.Viper.GetInt("Etcd.Port"))
 	r, err := etcd.NewEtcdResolver([]string{EtcdAddress})
@@ -54,6 +60,7 @@ func initUserRpc(Config *ttviper.Config) {
 	userClient = c
 }
 
+// 传递 注册操作 的上下文, 并获取 RPC Server 端的响应.
 func Register(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user.DouyinUserRegisterResponse, err error) {
 	resp, err = userClient.Register(ctx, req)
 	if err != nil {
@@ -65,6 +72,7 @@ func Register(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *u
 	return resp, nil
 }
 
+// 传递 登录操作 的上下文, 并获取 RPC Server 端的响应.
 func Login(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user.DouyinUserRegisterResponse, err error) {
 	resp, err = userClient.Login(ctx, req)
 	if err != nil {
@@ -76,6 +84,7 @@ func Login(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user
 	return resp, nil
 }
 
+// 传递 获取用户信息操作 的上下文, 并获取 RPC Server 端的响应.
 func GetUserById(ctx context.Context, req *user.DouyinUserRequest) (resp *user.DouyinUserResponse, err error) {
 	resp, err = userClient.GetUserById(ctx, req)
 	if err != nil {

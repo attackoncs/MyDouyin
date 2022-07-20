@@ -8,12 +8,13 @@ package main
 */
 
 import (
-	"MyDouyin/pkg/dlog"
 	"fmt"
 
 	"time"
 
+	"MyDouyin/pkg/dlog"
 	"MyDouyin/pkg/ttviper"
+
 	_ "github.com/spf13/viper/remote" // enabble viper remote config
 )
 

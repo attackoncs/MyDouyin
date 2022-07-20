@@ -1,3 +1,7 @@
+/*
+ * 发布视频 操作业务逻辑
+ */
+
 package command
 
 import (

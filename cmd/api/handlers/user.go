@@ -1,20 +1,24 @@
-//定义 User API 的 handler
+/*
+ * 定义 User API 的 handler
+ */
+
 package handlers
 
 import (
-	"MyDouyin/dal/pack"
 	"context"
 	"strconv"
 
 	"MyDouyin/pkg/errno"
 
-	"MyDouyin/cmd/api/rpc"
+	"MyDouyin/dal/pack"
 	"MyDouyin/kitex_gen/user"
+
+	"MyDouyin/cmd/api/rpc"
 
 	"github.com/gin-gonic/gin"
 )
 
-// Register register user info
+// 传递 注册用户操作 的上下文至 User 服务的 RPC 客户端, 并获取相应的响应.
 func Register(c *gin.Context) {
 	var registerVar UserRegisterParam
 	registerVar.UserName = c.Query("username")
@@ -36,6 +40,7 @@ func Register(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
+// 传递 注册用户登录操作 的上下文至 User 服务的 RPC 客户端, 并获取相应的响应.
 func Login(c *gin.Context) {
 	var registerVar UserRegisterParam
 	registerVar.UserName = c.Query("username")
@@ -57,6 +62,7 @@ func Login(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
+// 传递 获取注册用户`UserID`操作 的上下文至 User 服务的 RPC 客户端, 并获取相应的响应.
 func GetUserById(c *gin.Context) {
 	var userVar UserParam
 	userid, err := strconv.Atoi(c.Query("user_id"))

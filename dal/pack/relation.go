@@ -1,3 +1,7 @@
+/*
+ * 封装 Relation 数据库数据为 RPC Server 端响应
+ */
+
 package pack
 
 import (
@@ -5,6 +9,7 @@ import (
 	"errors"
 
 	"MyDouyin/kitex_gen/user"
+
 	"gorm.io/gorm"
 
 	"MyDouyin/dal/db"

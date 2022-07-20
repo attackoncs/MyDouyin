@@ -1,3 +1,7 @@
+/*
+ * Publish 数据库操作业务逻辑
+ */
+
 package db
 
 import (

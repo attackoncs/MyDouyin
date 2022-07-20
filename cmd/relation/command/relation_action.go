@@ -1,3 +1,7 @@
+/*
+ * 关注用户 操作业务逻辑
+ */
+
 package command
 
 import (

@@ -1,4 +1,7 @@
-//定义 Relation API 的 handler
+/*
+ * 定义 Relation API 的 handler
+ */
+
 package handlers
 
 import (
@@ -15,6 +18,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 传递 关注操作 的上下文至 Relation 服务的 RPC 客户端, 并获取相应的响应.
 func RelationAction(c *gin.Context) {
 	var paramVar RelationActionParam
 	token := c.Query("token")
@@ -51,6 +55,7 @@ func RelationAction(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
+// 传递 获取正在关注列表操作 的上下文至 Relation 服务的 RPC 客户端, 并获取相应的响应.
 func RelationFollowList(c *gin.Context) {
 	var paramVar UserParam
 	uid, err := strconv.Atoi(c.Query("user_id"))
@@ -77,6 +82,7 @@ func RelationFollowList(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
+// 传递 获取粉丝列表操作 的上下文至 Relation 服务的 RPC 客户端, 并获取相应的响应.
 func RelationFollowerList(c *gin.Context) {
 	var paramVar UserParam
 	uid, err := strconv.Atoi(c.Query("user_id"))
