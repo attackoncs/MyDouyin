@@ -1,21 +1,23 @@
 package main
 
 import (
-	"MyDouyin/pkg/dlog"
 	"context"
 	"fmt"
 	"net"
 
 	"github.com/cloudwego/kitex/pkg/klog"
+	"moul.io/zapgorm2"
 
 	"MyDouyin/dal"
 	user "MyDouyin/kitex_gen/user/usersrv"
+	"MyDouyin/pkg/dlog"
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/middleware"
 	"MyDouyin/pkg/ttviper"
 	etcd "github.com/a76yyyy/registry-etcd"
 	"github.com/cloudwego/kitex/pkg/limit"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
+
 	"github.com/cloudwego/kitex/server"
 
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
@@ -31,7 +33,7 @@ var (
 )
 
 func Init() {
-	dal.Init(&Config)
+	dal.Init()
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))
 }
 
@@ -39,12 +41,13 @@ func main() {
 	var logger dlog.ZapLogger = dlog.ZapLogger{
 		Level: klog.LevelInfo,
 	}
-
-	logger.SugaredLogger.Base = Config.InitLogger()
+	zaplogger := zapgorm2.New(dlog.InitLog())
+	logger.SugaredLogger.Base = &zaplogger
 
 	klog.SetLogger(&logger)
 
-	defer logger.SugaredLogger.Base.Sync()
+	defer logger.SugaredLogger.Base.ZapLogger.Sync()
+
 	r, err := etcd.NewEtcdRegistry([]string{EtcdAddress})
 	if err != nil {
 		klog.Fatal(err)
