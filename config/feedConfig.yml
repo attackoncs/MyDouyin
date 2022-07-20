@@ -9,7 +9,7 @@ Log:
   encoderConfig:
     #  # https://godoc.org/go.uber.org/zap/zapcore#EncoderConfig
     timeKey: "ts"
-    nameKey: "apiLogger"
+    nameKey: "feedLogger"
     messageKey: "msg"
     levelKey: "level"
     #  levelEncoder: "lowercase"
@@ -17,7 +17,7 @@ Log:
   #  StacktraceKey: "stacktrace"
   outputPaths:
     - "stdout"
-    - "log/API.log"
+    - "log/Feed.log"
   #errorOutputPaths:
   #  - "stderr"
   #initialFields:
@@ -27,13 +27,13 @@ JWT:
   signingKey: "signingKey"
 
 Etcd:
-  - Address: "127.0.0.1"
-    Port: 2379
+  Address: "127.0.0.1"
+  Port: 2379
 
 Server:
-  Name: "TiktokAPIServer"
-  Address: "0.0.0.0"
-  Port: 8088
+  Name: "TiktokFeedServer"
+  Address: "127.0.0.1"
+  Port: 8082
 
 Client:
   Echo: true
@@ -45,7 +45,7 @@ Client:
 MySQL:
   Host: "127.0.0.1"
   Port: 8091
-  User: "root"
+  User: "tiktok"
   Password: "password"
   DBName: "Tiktok"
   CharSet: "utf8mb4"

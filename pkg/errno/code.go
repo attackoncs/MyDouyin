@@ -2,6 +2,11 @@ package errno
 
 import code "github.com/a76yyyy/ErrnoCode"
 
+const (
+	// ErrVideoNotFound - 400: Video not found.
+	codeErrVideoNotFound int = iota + 110201
+)
+
 // HTTP Error
 var (
 	HttpSuccess                  = NewHttpErr(code.ErrSuccess, 200, "OK")

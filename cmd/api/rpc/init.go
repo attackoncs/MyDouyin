@@ -6,4 +6,7 @@ import "MyDouyin/pkg/ttviper"
 func InitRPC(Config *ttviper.Config) {
 	UserConfig := ttviper.ConfigInit("TIKTOK_USER", "userConfig")
 	initUserRpc(&UserConfig)
+
+	FeedConfig := ttviper.ConfigInit("TIKTOK_FEED", "feedConfig")
+	initFeedRpc(&FeedConfig)
 }

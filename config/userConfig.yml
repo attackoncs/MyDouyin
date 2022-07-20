@@ -34,7 +34,6 @@ Server:
   Name: "TiktokUserServer"
   Address: "127.0.0.1"
   Port: 8081
-  Table: "user"
 
 Client:
   Echo: true
@@ -52,4 +51,3 @@ MySQL:
   CharSet: "utf8mb4"
   ParseTime: true
   loc: "Local"
-  TableName: "user"
