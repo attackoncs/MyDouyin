@@ -1,11 +1,11 @@
 package main
 
 import (
+	"MyDouyin/dal/pack"
 	"context"
 
 	"MyDouyin/cmd/user/command"
 	"MyDouyin/kitex_gen/user"
-	"MyDouyin/pack"
 	"MyDouyin/pkg/errno"
 	"MyDouyin/pkg/jwt"
 )

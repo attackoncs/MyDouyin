@@ -1,15 +1,14 @@
 package handlers
 
 import (
+	"MyDouyin/dal/pack"
 	"context"
 	"strconv"
 
 	"MyDouyin/pkg/errno"
 
-	"MyDouyin/kitex_gen/user"
-	"MyDouyin/pack"
-
 	"MyDouyin/cmd/api/rpc"
+	"MyDouyin/kitex_gen/user"
 
 	"github.com/gin-gonic/gin"
 )

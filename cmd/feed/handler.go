@@ -2,8 +2,8 @@ package main
 
 import (
 	"MyDouyin/cmd/feed/command"
+	"MyDouyin/dal/pack"
 	"MyDouyin/kitex_gen/feed"
-	"MyDouyin/pack"
 	"MyDouyin/pkg/errno"
 	"context"
 )
