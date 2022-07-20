@@ -15,7 +15,7 @@ type FavoriteVideo struct {
 }
 
 // MGetVideoss multiple get list of videos info
-func GetFavoriteVideo(ctx context.Context, uid int, vid int) (FavoriteVideo, error) {
+func GetFavoriteVideo(ctx context.Context, uid int64, vid int64) (FavoriteVideo, error) {
 	video := FavoriteVideo{}
 
 	if err := DB.WithContext(ctx).First(video, "user_id = ? and video_id = ?", uid, vid).Error; err != nil {
