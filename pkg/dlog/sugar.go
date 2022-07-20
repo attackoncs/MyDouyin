@@ -1,3 +1,23 @@
+// Copyright (c) 2016 Uber Technologies, Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 package dlog
 
 import (
@@ -5,6 +25,7 @@ import (
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"moul.io/zapgorm2"
 
 	"go.uber.org/multierr"
 )
@@ -24,12 +45,12 @@ const (
 // printf-style formatting. For example, SugaredLoggers can produce InfoLevel
 // output with Infow ("info with" structured context), Info, or Infof.
 type SugaredLogger struct {
-	Base *zap.Logger
+	Base *zapgorm2.Logger
 }
 
-// Named adds a sub-scope to the logger's name. See Logger.Named for details.
 func (s *SugaredLogger) Named(name string) *SugaredLogger {
-	return &SugaredLogger{Base: s.Base.Named(name)}
+	zaplogger := zapgorm2.New(s.Base.ZapLogger.Named(name))
+	return &SugaredLogger{Base: &zaplogger}
 }
 
 // With adds a variadic number of fields to the logging context. It accepts a
@@ -60,7 +81,8 @@ func (s *SugaredLogger) Named(name string) *SugaredLogger {
 // and execution continues. Passing an orphaned key triggers similar behavior:
 // panics in development and errors in production.
 func (s *SugaredLogger) With(args ...interface{}) *SugaredLogger {
-	return &SugaredLogger{Base: s.Base.With(s.sweetenFields(args)...)}
+	zaplogger := zapgorm2.New(s.Base.ZapLogger.With(s.sweetenFields(args)...))
+	return &SugaredLogger{Base: &zaplogger}
 }
 
 // Debug uses fmt.Sprint to construct and log a message.
@@ -183,18 +205,18 @@ func (s *SugaredLogger) Fatalw(msg string, keysAndValues ...interface{}) {
 
 // Sync flushes any buffered log entries.
 func (s *SugaredLogger) Sync() error {
-	return s.Base.Sync()
+	return s.Base.ZapLogger.Sync()
 }
 
 func (s *SugaredLogger) log(lvl zapcore.Level, template string, fmtArgs []interface{}, context []interface{}) {
 	// If logging at this level is completely disabled, skip the overhead of
 	// string formatting.
-	if lvl < zap.DPanicLevel && !s.Base.Core().Enabled(lvl) {
+	if lvl < zap.DPanicLevel && !s.Base.ZapLogger.Core().Enabled(lvl) {
 		return
 	}
 
 	msg := getMessage(template, fmtArgs)
-	if ce := s.Base.Check(lvl, msg); ce != nil {
+	if ce := s.Base.ZapLogger.Check(lvl, msg); ce != nil {
 		ce.Write(s.sweetenFields(context)...)
 	}
 }
@@ -237,7 +259,7 @@ func (s *SugaredLogger) sweetenFields(args []interface{}) []zap.Field {
 
 		// Make sure this element isn't a dangling key.
 		if i == len(args)-1 {
-			s.Base.Error(_oddNumberErrMsg, zap.Any("ignored", args[i]))
+			s.Base.ZapLogger.Error(_oddNumberErrMsg, zap.Any("ignored", args[i]))
 			break
 		}
 
@@ -258,7 +280,7 @@ func (s *SugaredLogger) sweetenFields(args []interface{}) []zap.Field {
 
 	// If we encountered any invalid key-value pairs, log an error.
 	if len(invalid) > 0 {
-		s.Base.Error(_nonStringKeyErrMsg, zap.Array("invalid", invalid))
+		s.Base.ZapLogger.Error(_nonStringKeyErrMsg, zap.Array("invalid", invalid))
 	}
 	return fields
 }

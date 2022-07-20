@@ -8,6 +8,7 @@ package main
 */
 
 import (
+	"MyDouyin/pkg/dlog"
 	"fmt"
 
 	"time"
@@ -21,7 +22,7 @@ func main() {
 	config := ttviper.ConfigInit("TIKTOK", "userConfig")
 	viper := config.Viper
 
-	logger := config.InitLogger()
+	logger := dlog.InitLog()
 	defer logger.Sync()
 	logger.Info("logger construction succeeded")
 
