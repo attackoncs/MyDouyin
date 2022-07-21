@@ -60,7 +60,7 @@ func initCommentRpc(Config *ttviper.Config) {
 	commentClient = c
 }
 
-// 传递 评论操作 的上下文, 并获取 RPC Server 端的响应.
+// CommentAction 传递 评论操作 的上下文, 并获取 RPC Server 端的响应.
 func CommentAction(ctx context.Context, req *comment.DouyinCommentActionRequest) (resp *comment.DouyinCommentActionResponse, err error) {
 	resp, err = commentClient.CommentAction(ctx, req)
 	if err != nil {
@@ -72,7 +72,7 @@ func CommentAction(ctx context.Context, req *comment.DouyinCommentActionRequest)
 	return resp, nil
 }
 
-// 传递 获取评论列表操作 的上下文, 并获取 RPC Server 端的响应.
+// CommentList 传递 获取评论列表操作 的上下文, 并获取 RPC Server 端的响应.
 func CommentList(ctx context.Context, req *comment.DouyinCommentListRequest) (resp *comment.DouyinCommentListResponse, err error) {
 	resp, err = commentClient.CommentList(ctx, req)
 	if err != nil {

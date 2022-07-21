@@ -20,7 +20,6 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-// Config
 type Config struct {
 	Viper *viper.Viper
 }
@@ -107,7 +106,7 @@ func (v *Config) SetRemoteConfig(u *url.URL) {
 
 }
 
-// SetConfigType
+// SetDefaultValue SetConfigType
 func (v *Config) SetDefaultValue() {
 	v.Viper.SetDefault("global.unset", "default(viper)")
 	/* add more */
@@ -134,7 +133,6 @@ func (v *Config) WatchRemoteConf() {
 	}
 }
 
-// ZapLogConfig
 func (v *Config) ZapLogConfig() []byte {
 	log := v.Viper.Sub("Log")
 	logConfig, err := json.Marshal(log.AllSettings())
@@ -144,7 +142,6 @@ func (v *Config) ZapLogConfig() []byte {
 	return logConfig
 }
 
-// InitLogger
 func (v *Config) InitLogger() *zap.Logger {
 	var cfg zap.Config
 	if err := json.Unmarshal(v.ZapLogConfig(), &cfg); err != nil {

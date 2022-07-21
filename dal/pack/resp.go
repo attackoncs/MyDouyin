@@ -36,7 +36,7 @@ func userRegisterResp(err errno.ErrNo) *user.DouyinUserRegisterResponse {
 	return &user.DouyinUserRegisterResponse{StatusCode: int32(err.ErrCode), StatusMsg: &err.ErrMsg}
 }
 
-// BuilduserResp build userResp from error
+// BuilduserUserResp BuilduserResp build userResp from error
 func BuilduserUserResp(err error) *user.DouyinUserResponse {
 	if err == nil {
 		return userResp(errno.Success)
@@ -93,7 +93,7 @@ func publishResp(err errno.ErrNo) *publish.DouyinPublishActionResponse {
 	return &publish.DouyinPublishActionResponse{StatusCode: int32(err.ErrCode), StatusMsg: &err.ErrMsg}
 }
 
-// BuildPublishResp build PublishResp from error
+// BuildPublishListResp BuildPublishResp build PublishResp from error
 func BuildPublishListResp(err error) *publish.DouyinPublishListResponse {
 	if err == nil {
 		return publishListResp(errno.Success)

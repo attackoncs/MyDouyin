@@ -22,7 +22,7 @@ func NewCommentActionService(ctx context.Context) *CommentActionService {
 	return &CommentActionService{ctx: ctx}
 }
 
-// CommentActionService action comment.
+// CommentAction CommentActionService action comment.
 func (s *CommentActionService) CommentAction(req *comment.DouyinCommentActionRequest) error {
 	// 1-评论
 	if req.ActionType == 1 {

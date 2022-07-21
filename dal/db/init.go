@@ -22,7 +22,7 @@ var (
 	Config = ttviper.ConfigInit("TIKTOK_DB", "dbConfig")
 )
 
-// Init init DB
+// InitDB Init init DB
 func InitDB() {
 	var err error
 

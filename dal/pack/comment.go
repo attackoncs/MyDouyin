@@ -15,7 +15,7 @@ import (
 	"MyDouyin/dal/db"
 )
 
-// Comment pack Comments info.
+// Comments Comment pack Comments info.
 func Comments(ctx context.Context, vs []*db.Comment, fromID int64) ([]*comment.Comment, error) {
 	comments := make([]*comment.Comment, 0)
 	for _, v := range vs {

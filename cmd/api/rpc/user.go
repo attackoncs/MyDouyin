@@ -60,7 +60,7 @@ func initUserRpc(Config *ttviper.Config) {
 	userClient = c
 }
 
-// 传递 注册操作 的上下文, 并获取 RPC Server 端的响应.
+// Register 传递 注册操作 的上下文, 并获取 RPC Server 端的响应.
 func Register(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user.DouyinUserRegisterResponse, err error) {
 	resp, err = userClient.Register(ctx, req)
 	if err != nil {
@@ -72,7 +72,7 @@ func Register(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *u
 	return resp, nil
 }
 
-// 传递 登录操作 的上下文, 并获取 RPC Server 端的响应.
+// Login 传递 登录操作 的上下文, 并获取 RPC Server 端的响应.
 func Login(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user.DouyinUserRegisterResponse, err error) {
 	resp, err = userClient.Login(ctx, req)
 	if err != nil {
@@ -84,7 +84,7 @@ func Login(ctx context.Context, req *user.DouyinUserRegisterRequest) (resp *user
 	return resp, nil
 }
 
-// 传递 获取用户信息操作 的上下文, 并获取 RPC Server 端的响应.
+// GetUserById 传递 获取用户信息操作 的上下文, 并获取 RPC Server 端的响应.
 func GetUserById(ctx context.Context, req *user.DouyinUserRequest) (resp *user.DouyinUserResponse, err error) {
 	resp, err = userClient.GetUserById(ctx, req)
 	if err != nil {

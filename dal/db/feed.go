@@ -28,7 +28,7 @@ func (Video) TableName() string {
 	return "video"
 }
 
-// MGetVideoss multiple get list of videos info
+// MGetVideos MGetVideoss multiple get list of videos info
 func MGetVideos(ctx context.Context, limit int, latestTime *int64) ([]*Video, error) {
 	videos := make([]*Video, 0)
 

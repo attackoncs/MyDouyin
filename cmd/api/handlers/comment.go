@@ -18,7 +18,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// 传递 评论操作 的上下文至 Comment 服务的 RPC 客户端, 并获取相应的响应.
+// CommentAction 传递 评论操作 的上下文至 Comment 服务的 RPC 客户端, 并获取相应的响应.
 func CommentAction(c *gin.Context) {
 	var paramVar CommentActionParam
 	token := c.Query("token")
@@ -68,7 +68,7 @@ func CommentAction(c *gin.Context) {
 	SendResponse(c, resp)
 }
 
-// 传递 获取评论列表操作 的上下文至 Comment 服务的 RPC 客户端, 并获取相应的响应.
+// CommentList 传递 获取评论列表操作 的上下文至 Comment 服务的 RPC 客户端, 并获取相应的响应.
 func CommentList(c *gin.Context) {
 	var paramVar CommentListParam
 	videoid, err := strconv.Atoi(c.Query("video_id"))

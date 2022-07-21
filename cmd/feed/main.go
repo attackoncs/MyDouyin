@@ -38,7 +38,7 @@ var (
 	Jwt         *jwt.JWT
 )
 
-// Feed RPC Server 端配置初始化
+// Init Feed RPC Server 端配置初始化
 func Init() {
 	dal.Init()
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))

@@ -17,7 +17,7 @@ type CommentListService struct {
 	ctx context.Context
 }
 
-// NewCommentActionService new CommentActionService
+// NewCommentListService NewCommentActionService new CommentActionService
 func NewCommentListService(ctx context.Context) *CommentListService {
 	return &CommentListService{
 		ctx: ctx,

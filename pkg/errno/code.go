@@ -2,7 +2,7 @@
  * 错误码, 设计逻辑:https://github.com/a76yyyy/ErrnoCode
  */
 
-// 错误码
+// Package errno 错误码
 package errno
 
 import code "github.com/a76yyyy/ErrnoCode"

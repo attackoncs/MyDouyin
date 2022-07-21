@@ -60,7 +60,7 @@ func initPublishRpc(Config *ttviper.Config) {
 	publishClient = c
 }
 
-// 传递 发布视频操作 的上下文, 并获取 RPC Server 端的响应.
+// PublishAction 传递 发布视频操作 的上下文, 并获取 RPC Server 端的响应.
 func PublishAction(ctx context.Context, req *publish.DouyinPublishActionRequest) (resp *publish.DouyinPublishActionResponse, err error) {
 	resp, err = publishClient.PublishAction(ctx, req)
 	if err != nil {
@@ -72,7 +72,7 @@ func PublishAction(ctx context.Context, req *publish.DouyinPublishActionRequest)
 	return resp, nil
 }
 
-// 传递 获取用户发布视频列表操作 的上下文, 并获取 RPC Server 端的响应.
+// PublishList 传递 获取用户发布视频列表操作 的上下文, 并获取 RPC Server 端的响应.
 func PublishList(ctx context.Context, req *publish.DouyinPublishListRequest) (resp *publish.DouyinPublishListResponse, err error) {
 	resp, err = publishClient.PublishList(ctx, req)
 	if err != nil {

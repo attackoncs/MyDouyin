@@ -60,7 +60,7 @@ func initFavoriteRpc(Config *ttviper.Config) {
 	favoriteClient = c
 }
 
-// 传递 点赞操作 的上下文, 并获取 RPC Server 端的响应.
+// FavoriteAction 传递 点赞操作 的上下文, 并获取 RPC Server 端的响应.
 func FavoriteAction(ctx context.Context, req *favorite.DouyinFavoriteActionRequest) (resp *favorite.DouyinFavoriteActionResponse, err error) {
 	resp, err = favoriteClient.FavoriteAction(ctx, req)
 	if err != nil {
@@ -72,7 +72,7 @@ func FavoriteAction(ctx context.Context, req *favorite.DouyinFavoriteActionReque
 	return resp, nil
 }
 
-// 传递 获取点赞列表操作 的上下文, 并获取 RPC Server 端的响应.
+// FavoriteList 传递 获取点赞列表操作 的上下文, 并获取 RPC Server 端的响应.
 func FavoriteList(ctx context.Context, req *favorite.DouyinFavoriteListRequest) (resp *favorite.DouyinFavoriteListResponse, err error) {
 	resp, err = favoriteClient.FavoriteList(ctx, req)
 	if err != nil {

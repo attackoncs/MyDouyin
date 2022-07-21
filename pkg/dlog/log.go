@@ -2,7 +2,7 @@
  * 基于 klog 和 zap 封装的 Logger 及其接口
  */
 
-// 基于 klog 和 zap 封装的 Logger 及其接口
+// Package dlog 基于 klog 和 zap 封装的 Logger 及其接口
 package dlog
 
 import (
@@ -20,7 +20,7 @@ var (
 	config = ttviper.ConfigInit("TIKTOK_LOG", "logConfig")
 )
 
-// Init Logger config
+// InitLog Init Logger config
 func InitLog() *zap.Logger {
 	return config.InitLogger()
 }

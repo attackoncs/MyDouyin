@@ -2,7 +2,6 @@
  * 使用 Gin 提供 API 服务将 HTTP 请求发送给 RPC 微服务端
  */
 
-// 使用 Gin 提供 API 服务将 HTTP 请求发送给 RPC 微服务端
 package main
 
 import (
@@ -15,7 +14,6 @@ import (
 
 	"go.uber.org/zap"
 
-	// jwt "github.com/appleboy/gin-jwt/v2"
 	"MyDouyin/pkg/dlog"
 	"MyDouyin/pkg/jwt"
 	"MyDouyin/pkg/ttviper"
@@ -33,7 +31,7 @@ var (
 	Jwt         *jwt.JWT
 )
 
-// 初始化 API 配置
+// Init 初始化 API 配置
 func Init() {
 	rpc.InitRPC(&Config)
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))

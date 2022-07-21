@@ -38,7 +38,7 @@ var (
 	Jwt         *jwt.JWT
 )
 
-// Favorite RPC Server 端配置初始化
+// Init Favorite RPC Server 端配置初始化
 func Init() {
 	dal.Init()
 	Jwt = jwt.NewJWT([]byte(Config.Viper.GetString("JWT.signingKey")))

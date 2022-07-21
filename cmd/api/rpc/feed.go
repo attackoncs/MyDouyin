@@ -60,7 +60,7 @@ func initFeedRpc(Config *ttviper.Config) {
 	feedClient = c
 }
 
-// 传递 获取视频流操作 的上下文, 并获取 RPC Server 端的响应.
+// GetUserFeed 传递 获取视频流操作 的上下文, 并获取 RPC Server 端的响应.
 func GetUserFeed(ctx context.Context, req *feed.DouyinFeedRequest) (resp *feed.DouyinFeedResponse, err error) {
 	resp, err = feedClient.GetUserFeed(ctx, req)
 	if err != nil {
